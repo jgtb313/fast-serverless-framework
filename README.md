@@ -90,8 +90,10 @@ FastServerlessFramework.init({
 
 ### Consumers
 
+> src/modules/consumers/example.js
+
 ```js
-FastServerlessFramework.Consumers.register({
+exports.handler = FastServerlessFramework.Consumers.register({
   topic: '',
   concurrency: 1,
   timeout: 900,
@@ -102,8 +104,10 @@ FastServerlessFramework.Consumers.register({
 
 ### Endpoints
 
+> src/modules/endpoits/v1/example.js
+
 ```js
-FastServerlessFramework.Endpoints.register({
+exports.handler = FastServerlessFramework.Endpoints.register({
   method: '',
   params: '',
   middlewares: []
@@ -118,8 +122,10 @@ FastServerlessFramework.Endpoints.register({
 
 ### Schedules
 
+> src/modules/schedules/example.js
+
 ```js
-FastServerlessFramework.Schedules.register({
+exports.handler = FastServerlessFramework.Schedules.register({
   rate: '5 minutes',
   timeout: 900,
   handler () {}
