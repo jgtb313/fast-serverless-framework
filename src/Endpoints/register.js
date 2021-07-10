@@ -52,6 +52,7 @@ const register = ({ method, params = '', middlewares, handler }) => {
     } catch (error) {
       console.log(error)
       const response = {
+        config: state.config,
         statusCode: error.status ?? 500,
         body: JSON.stringify({ message: error.message, stack: error.stack })
       }
