@@ -1,5 +1,4 @@
-import { uniq } from 'lodash'
-import { getConfig } from './utils'
+import { getConfig, uniq } from './utils'
 
 const state = {
   topics: [],
