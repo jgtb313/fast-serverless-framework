@@ -50,9 +50,10 @@ const register = ({ method, params = '', middlewares, handler }) => {
       }
       return response
     } catch (error) {
+      console.log(error)
       const response = {
         statusCode: error.status ?? 500,
-        body: JSON.stringify(error)
+        body: JSON.stringify({ message: error.message, stack: error.stack })
       }
       return response
     }
