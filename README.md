@@ -62,8 +62,8 @@ This project .
 | Directory / File                | Description                                                                                                                    |
 | ----------------------------    | ------------------------------------------------------------------------------------------------------------------------------ |
 | `src`                           | Description                                                                                                                    |
-| `src/index.ts`                  | Description                                                                                                                    |
-| `src/config.ts`                 | Description                                                                                                                    |
+| `src/index.js`                  | Description                                                                                                                    |
+| `src/config.js`                 | Description                                                                                                                    |
 | `src/modules/users/consumers`   | Description                                                                                                                    |
 | `src/modules/users/endpoints/v1`| Description                                                                                                                    |
 | `src/modules/users/schedules`   | Description                                                                                                                    |
