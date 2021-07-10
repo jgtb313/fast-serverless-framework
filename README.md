@@ -56,7 +56,7 @@ This project .
 │   │   │   │   │   └── example.js
 │   │   │   └── schedules
 │   │   │   │   └── example.js
-├── env.js
+├── .env
 ```
 
 | Directory / File                | Description                                                                                                                    |
@@ -67,7 +67,7 @@ This project .
 | `src/modules/users/consumers`   | Description                                                                                                                    |
 | `src/modules/users/endpoints/v1`| Description                                                                                                                    |
 | `src/modules/users/schedules`   | Description                                                                                                                    |
-| `env.js`                        | Description                                                                                                                    |
+| `.env`                          | Description                                                                                                                    |
 
 ## Usage
 
