@@ -67,7 +67,7 @@ const buildModuleSubscriptions = (state) => buildService(state.consumers, 'Subsc
   Properties: {
     TopicArn: topicRef(topic),
     Endpoint: {
-      'Fn::GetAtt:': [
+      'Fn::GetAtt': [
         serviceName(name, 'Queue'),
         'Arn'
       ]
