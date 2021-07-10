@@ -73,8 +73,18 @@ This project .
 
 ### Initialization
 
+> src/index.js
+
 ```js
-FastServerlessFramework.init({
+FastServerlessFramework.init()
+```
+
+### Config
+
+> src/config.js
+
+```
+module.exports = {
   boostrap: () => {} // executed before any Consumers, Endpoints or Schedules,
   endpoints: {
     beforeEach: [], // executed before any Endpoint
@@ -85,7 +95,7 @@ FastServerlessFramework.init({
     region: '' // AWS Region (required)
   },
   stage: '' // dev or prod (required)
-})
+}
 ```
 
 ### Consumers
