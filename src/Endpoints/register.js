@@ -2,7 +2,7 @@ import bootstrap from '../bootstrap'
 import state from '../state'
 import { getContext, kebabize, asyncPipe } from '../utils'
 
-const register = ({ method, params = '', middlewares, handler, isPublic }) => {
+const register = ({ method, params = '', middlewares, handler }) => {
   const { module, version, file, path } = getContext()
 
   const moduleEndpoint = `${module}-${file}`
