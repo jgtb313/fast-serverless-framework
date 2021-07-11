@@ -1,5 +1,6 @@
 import fs from 'fs'
 import normalizePath from 'normalize-path'
+import { resolve } from 'path'
 
 const safeTryCatch = (callback, fallback, file) => {
   try {
@@ -13,10 +14,11 @@ const safeTryCatch = (callback, fallback, file) => {
 const readModules = () => safeTryCatch(() => fs.readdirSync(`${__dirname}/../../../src/modules`), [])
 const getConfig = () => safeTryCatch(() => {
   console.log({
+    resolve: resolve('src/config'),
     cwd: process.cwd(),
     configDirname: `../../../src/config`
   })
-  return require(`../../../src/config`)
+  return require(resolve('src/config'))
 }, {}, `../../../src/config`)
 
 const getContext = () => {
