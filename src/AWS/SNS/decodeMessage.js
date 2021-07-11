@@ -1,6 +1,6 @@
 const decodeMessage = ({ Records }) => {
-  const [{ Body }] = Records
-  const message = JSON.parse(Body)
+  const [{ body }] = Records
+  const message = JSON.parse(body)
   const decodedMessage = JSON.parse(message.Message)
 
   return decodedMessage
