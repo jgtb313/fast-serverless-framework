@@ -2,32 +2,16 @@ import fs from 'fs'
 import normalizePath from 'normalize-path'
 import { resolve } from 'path'
 
-const safeTryCatch = (callback, fallback, file) => {
+const safeTryCatch = (callback, fallback) => {
   try {
     return callback()
   } catch (err) {
-    console.log({ err, file })
     return fallback
   }
 }
 
-const readModules = () => safeTryCatch(() => fs.readdirSync(`${__dirname}/../../../src/modules`), [])
-const getConfig = async () => {
-  console.log({
-    resolve: resolve('src/config'),
-    cwd: process.cwd(),
-    configDirname: `../../../src/config`,
-    readdirSync: fs.readdirSync('./src')
-  })
-  try {
-    const config = require('./src/config.js')
-    return config
-  } catch (err) {
-    console.log({
-      errConfig: err
-    })
-  }
-}
+const readModules = () => safeTryCatch(() => fs.readdirSync(`${process.cwd()}/src/modules`), [])
+const getConfig = () => safeTryCatch(() => fs.readdirSync(`${process.cwd()}/src/config`), [])
 
 const getContext = () => {
   const trace = normalizePath(Error().stack.split('Object.<anonymous>')[1].split('.js')[0]).split('modules')[1].split('/').filter(st => st)
