@@ -1,4 +1,4 @@
-import { getConfig, uniq } from './utils'
+import { uniq, getConfig } from './utils'
 
 const state = {
   topics: [],
@@ -6,6 +6,7 @@ const state = {
   schedules: [],
   endpoints: [],
   config: {
+    project: '',
     bootstrap: undefined,
     endpoints: {
       beforeEach: [],
@@ -15,23 +16,27 @@ const state = {
       id: '',
       region: ''
     },
-    stage: ''
+    stage: '',
+    nodeVersion: ''
   },
-  addTopic: function (value) {
+  addTopic (value) {
     this.topics = uniq([...this.topics, value], 'name')
   },
-  addConsumer: function (value) {
+  addConsumer (value) {
     this.consumers = [...this.consumers, value]
   },
-  addSchedule: function (value) {
+  addSchedule (value) {
     this.schedules = [...this.schedules, value]
   },
-  addEndpoint: function (value) {
+  addEndpoint (value) {
     this.endpoints = [...this.endpoints, value]
   },
-  setConfig: function () {
+  setConfig () {
     const value = getConfig()
-    this.config = value
+    this.config = {
+      ...this.config,
+      ...value
+    }
   }
 }
 

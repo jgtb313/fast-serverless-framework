@@ -3,9 +3,14 @@ import state from './state'
 let app
 
 const bootstrap = async () => {
-  if (!app) {
-    state.setConfig()
-    state.config.boostrap && await state.config.boostrap()
+  if (app) {
+    return
+  }
+
+  state.setConfig()
+  
+  if (state.config.boostrap) {
+    app = await state.config.boostrap()
   }
 }
 

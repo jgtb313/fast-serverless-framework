@@ -101,6 +101,72 @@ const buildModulePolicies = (state) => ({
     }
   }
 })
+const buildServerless = (state) => {
+  const serverless = {
+    service: state.config.project,
+    frameworkVersion: '2',
+    useDotenv: true,
+    provider: {
+      name: 'aws',
+      lambdaHashingVersion: '20201221',
+      runtime: `nodejs${state.config.nodeVersion}`,
+      stage: state.config.stage,
+      region: state.config.aws.region,
+      stackName: `${state.config.project}-${state.config.stage}`,
+      apiName: `${state.config.project}-${state.config.stage}`,
+      iam: {
+        role: `arn:aws:iam::${state.config.nodeVersion}:role/${AWS_LAMBDA_ROLE}`
+      },
+      profile: '${AWS_PROFILE_NAME}',
+      memorySize: 128,
+      timeout: 30
+    },
+    plugins: [
+      'serverless-dotenv-plugin',
+      'serverless-webpack',
+      'serverless-pseudo-parameters',
+      'serverless-offline',
+      'serverless-offline-scheduler',
+      'serverless-offline-sqs',
+      'serverless-localstack'
+    ],
+    custom: {
+      localstack: {
+        stages: [
+          'local'
+        ]
+      }
+    },
+    settings: {
+      accountId: state.config.aws.id,
+      region: state.config.aws.region,
+      stage: state.config.stage,
+      debug: true
+    },
+    webpack: {
+      packager: 'yarn',
+      includeModules: {
+        forceExclude: [
+          'aws-sdk'
+        ]
+      }
+    },
+    resources: {
+      Resources: [
+        '${file(./serverless.modules.resources.yml)}'
+      ]
+    },
+    functions: [
+      '${file(./serverless.modules.consumers.yml)}',
+      '${file(./serverless.modules.endpoints.yml)}',
+      '${file(./serverless.modules.schedules.yml)}'
+    ]
+  }
+
+  yaml.sync(`${process.cwd()}/serverless.yml`, serverless)
+
+  return Promise.resolve(state)
+}
 const buildResourcesModules = (state) => {
   const topics = buildModuleTopics(state)
   const consumers = buildModuleConsumers(state)
@@ -181,13 +247,57 @@ const buildSchedulesModules = (state) => {
   return Promise.resolve(state)
 }
 
+const buildWebpack = () => {
+  const data = `const path = require('path')
+const slsw = require('serverless-webpack')
+const nodeExternals = require('webpack-node-externals')
+
+module.exports = {
+  entry: {
+    ...slsw.lib.entries,
+    'src/config': './src/config.js'
+  },
+  devtool: 'source-map',
+  output: {
+    libraryTarget: 'commonjs',
+    filename: '[name].js',
+    path: path.join(__dirname, '.build')
+  },
+  mode: 'development',
+  target: 'node',
+  externals: [nodeExternals()],
+  module: {
+    rules: [
+      {
+        test: /\.js$/, // include .js files
+        enforce: 'pre', // preload the jshint loader
+        exclude: /node_modules/, // exclude any and all files in the node_modules folder
+        include: __dirname,
+        use: [
+          {
+            loader: 'babel-loader'
+          }
+        ]
+      }
+    ]
+  }
+}
+`
+
+  fs.writeFileSync('webpack.config.js', data, 'utf8')
+
+  return Promise.resolve(state)
+}
+
 const init = () => {
   state.setConfig()
   prepareState(state)
+    .then(buildServerless)
     .then(buildResourcesModules)
     .then(buildEndpointsModules)
     .then(buildConsumersModules)
     .then(buildSchedulesModules)
+    .then(buildWebpack)
 }
 
 export default init

@@ -4,11 +4,12 @@
 
 ## Features
 
--   [**AWS SDK**](https://babeljs.io/) - Write next generation JavaScript today.
--   [**Serverless**](https://babeljs.io/) - Write next generation JavaScript today.
--   [**Serverless Offline**](https://babeljs.io/) - Write next generation JavaScript today.
--   [**Serverless Offline SQS**](https://babeljs.io/) - Write next generation JavaScript today.
--   [**Serverless Offline Scheduler**](https://babeljs.io/) - Write next generation JavaScript today.
+-   [**AWS SDK**](https://) - Write next generation JavaScript today.
+-   [**Serverless**](https://) - Write next generation JavaScript today.
+-   [**Serverless Offline**](https://) - Write next generation JavaScript today.
+-   [**Serverless Offline SQS**](https://) - Write next generation JavaScript today.
+-   [**Serverless Offline Scheduler**](https://) - Write next generation JavaScript today.
+-   [**Serverless Localstack**](https://) - Write next generation JavaScript today.
 
 ## Installation
 
@@ -85,7 +86,8 @@ FastServerlessFramework.init()
 
 ```
 module.exports = {
-  boostrap: () => {} // executed before any Consumers, Endpoints or Schedules,
+  project: '', // (required)
+  boostrap: () => {} // executed before any Consumers, Endpoints or Schedules
   endpoints: {
     beforeEach: [], // executed before any Endpoint
     afterEach: [] // executed after any Endpoint
@@ -94,7 +96,8 @@ module.exports = {
     id: '', // AWS ID Account (required)
     region: '' // AWS Region (required)
   },
-  stage: '' // dev or prod (required)
+  stage: '', // (required)
+  nodeVersion: '' // (required)
 }
 ```
 
