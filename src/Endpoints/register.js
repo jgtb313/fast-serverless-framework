@@ -2,7 +2,7 @@ import bootstrap from '../bootstrap'
 import state from '../state'
 import { getContext, kebabize, asyncPipe } from '../utils'
 
-const register = ({ method, params = '', middlewares, handler }) => {
+const register = ({ method, params = '', middlewares = [], handler }) => {
   const { module, version, file, path } = getContext()
 
   const moduleEndpoint = `${module}-${file}`
@@ -36,17 +36,18 @@ const register = ({ method, params = '', middlewares, handler }) => {
       }
 
       const execute = asyncPipe(
-        ...state.config.endpoints?.beforeEach,
-        ...middlewares,
-        handler,
-        ...state.config.endpoints?.afterEach,
+        // ...state.config.endpoints?.beforeEach,
+        // ...middlewares,
+        handler
+        // ...state.config.endpoints?.afterEach,
       )
   
       const result = await execute(request)
   
       const response = {
         statusCode: 200,
-        body: JSON.stringify(result)
+        body: JSON.stringify(result),
+        config: state.config
       }
       return response
     } catch (error) {
