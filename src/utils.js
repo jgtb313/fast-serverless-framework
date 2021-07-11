@@ -10,7 +10,12 @@ const safeTryCatch = (callback, fallback) => {
 }
 
 const readModules = () => safeTryCatch(() => fs.readdirSync(`${__dirname}/../../../src/modules`), [])
-const getConfig = () => safeTryCatch(() => require(`${__dirname}/../../../src/config`), {})
+const getConfig = () => safeTryCatch(() => {
+  console.log({
+    configDirname: `${__dirname}/../../../src/config`
+  })
+  return require(`${__dirname}/../../../src/config`)
+}, {})
 
 const getContext = () => {
   const trace = normalizePath(Error().stack.split('Object.<anonymous>')[1].split('.js')[0]).split('modules')[1].split('/').filter(st => st)
