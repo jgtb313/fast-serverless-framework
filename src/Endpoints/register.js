@@ -36,6 +36,9 @@ const register = ({ method, params = '', middlewares = [], handler }) => {
       }
 
       console.log(state)
+      console.log({
+        __dirname
+      })
 
       const execute = asyncPipe(
         ...(state.config.endpoints?.beforeEach || []),
