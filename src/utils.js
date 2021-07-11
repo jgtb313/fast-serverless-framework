@@ -17,7 +17,7 @@ const getConfig = async () => {
     resolve: resolve('src/config'),
     cwd: process.cwd(),
     configDirname: `../../../src/config`,
-    readdirSync: fs.readdirSync('../../../src')
+    readdirSync: fs.readdirSync('.')
   })
   try {
     const config = await import('../../../src/config')
