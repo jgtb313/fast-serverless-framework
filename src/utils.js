@@ -1,10 +1,11 @@
 import fs from 'fs'
 import normalizePath from 'normalize-path'
 
-const safeTryCatch = (callback, fallback) => {
+const safeTryCatch = (callback, fallback, file) => {
   try {
     return callback()
   } catch (err) {
+    console.log({ err, file })
     return fallback
   }
 }
@@ -12,10 +13,10 @@ const safeTryCatch = (callback, fallback) => {
 const readModules = () => safeTryCatch(() => fs.readdirSync(`${__dirname}/../../../src/modules`), [])
 const getConfig = () => safeTryCatch(() => {
   console.log({
-    configDirname: `${__dirname}/../../../src/config`
+    configDirname: `../../../src/config`
   })
-  return require(`${__dirname}/../../../src/config`)
-}, {})
+  return require(`../../../src/config`)
+}, {}, `../../../src/config`)
 
 const getContext = () => {
   const trace = normalizePath(Error().stack.split('Object.<anonymous>')[1].split('.js')[0]).split('modules')[1].split('/').filter(st => st)
