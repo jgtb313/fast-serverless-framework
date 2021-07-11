@@ -9,8 +9,8 @@ const bootstrap = async () => {
 
   state.setConfig()
   
-  if (state.config.boostrap) {
-    app = await state.config.boostrap()
+  if (state.config.bootstrap) {
+    app = await state.config.bootstrap()
   }
 }
 
