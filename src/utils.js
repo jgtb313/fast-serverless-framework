@@ -12,14 +12,15 @@ const safeTryCatch = (callback, fallback, file) => {
 }
 
 const readModules = () => safeTryCatch(() => fs.readdirSync(`${__dirname}/../../../src/modules`), [])
-const getConfig = () => safeTryCatch(() => {
+const getConfig = async () => {
   console.log({
     resolve: resolve('src/config'),
     cwd: process.cwd(),
     configDirname: `../../../src/config`
   })
-  return require(resolve('src/config'))
-}, {}, `../../../src/config`)
+  const config = await import('../../../src/config')
+  return config
+}
 
 const getContext = () => {
   const trace = normalizePath(Error().stack.split('Object.<anonymous>')[1].split('.js')[0]).split('modules')[1].split('/').filter(st => st)
