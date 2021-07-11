@@ -58,8 +58,7 @@ const buildModuleConsumers = (state) => buildService(state.consumers, 'Queue', (
   Type: 'AWS::SQS::Queue',
   Properties: {
     QueueName: kebabCase(name, state.config.stage),
-    VisibilityTimeout: options.timeout,
-    FifoQueue: options.fifo
+    VisibilityTimeout: options.timeout
   }
 }))
 const buildModuleSubscriptions = (state) => buildService(state.consumers, 'Subscription', ({ topic, name }) => ({

@@ -1,4 +1,3 @@
-import AWS from '../AWS'
 import bootstrap from '../bootstrap'
 import state from '../state'
 import { getContext, kebabize } from '../utils'
@@ -21,9 +20,8 @@ const register = ({ rate, timeout = 900, handler }) => {
 
   return async (event, context) => {
     const id = context.awsRequestId
-    const message = AWS.SNS.decodeMessage(event)
     await bootstrap()
-    await handler(message, { id })
+    await handler(event, { id })
   }
 }
 
