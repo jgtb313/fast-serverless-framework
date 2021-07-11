@@ -36,10 +36,10 @@ const register = ({ method, params = '', middlewares = [], handler }) => {
       }
 
       const execute = asyncPipe(
-        ...state.config.endpoints?.beforeEach,
-        ...middlewares,
+        // ...state.config.endpoints?.beforeEach,
+        // ...middlewares,
         handler,
-        ...state.config.endpoints?.afterEach
+        // ...state.config.endpoints?.afterEach
       )
   
       const result = await execute(request)
