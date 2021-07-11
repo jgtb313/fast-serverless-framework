@@ -23,7 +23,7 @@ const register = ({ method, params = '', middlewares = [], handler }) => {
   return async (event, context) => {
     const id = context.awsRequestId
     try {
-      // await bootstrap()
+      await bootstrap()
 
       const { queryStringParameters, pathParameters, body, headers } = event
 
@@ -35,20 +35,20 @@ const register = ({ method, params = '', middlewares = [], handler }) => {
         body: body ? JSON.parse(body) : {}
       }
 
-      // const execute = asyncPipe(
-      //   // ...state.config.endpoints?.beforeEach,
-      //   // ...middlewares,
-      //   handler
-      //   // ...state.config.endpoints?.afterEach,
-      // )
+      const execute = asyncPipe(
+        ...state.config.endpoints?.beforeEach,
+        ...middlewares,
+        handler,
+        ...state.config.endpoints?.afterEach
+      )
   
-      // const result = await execute(request)
+      const result = await execute(request)
 
-      // console.log(result)
+      console.log(result)
   
       const response = {
         statusCode: 200,
-        body: JSON.stringify({ message: 'Ok' })
+        body: JSON.stringify(result)
       }
       return response
     } catch (error) {

@@ -3,11 +3,9 @@
     [
       "@babel/preset-env",
       {
-        "targets": {
-          "node": 6
-        }
+        "useBuiltIns": false
       }
     ]
   ],
-  "plugins": []
+  "plugins": ["@babel/plugin-transform-destructuring", "@babel/plugin-transform-runtime", "@babel/plugin-proposal-object-rest-spread"]
 }
