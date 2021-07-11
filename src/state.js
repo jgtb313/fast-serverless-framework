@@ -14,7 +14,8 @@ const state = {
     },
     aws: {
       id: '',
-      region: ''
+      region: '',
+      lambdaRole: ''
     },
     stage: '',
     nodeVersion: ''

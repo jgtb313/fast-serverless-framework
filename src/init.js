@@ -115,7 +115,7 @@ const buildServerless = (state) => {
       stackName: `${state.config.project}-${state.config.stage}`,
       apiName: `${state.config.project}-${state.config.stage}`,
       iam: {
-        role: `arn:aws:iam::${state.config.nodeVersion}:role/${AWS_LAMBDA_ROLE}`
+        role: `arn:aws:iam::${state.config.nodeVersion}:role/${state.config.aws.lambdaRole}`
       },
       profile: '${AWS_PROFILE_NAME}',
       memorySize: 128,
