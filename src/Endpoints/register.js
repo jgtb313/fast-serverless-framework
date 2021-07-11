@@ -43,6 +43,8 @@ const register = ({ method, params = '', middlewares = [], handler }) => {
       )
   
       const result = await execute(request)
+
+      console.log(result)
   
       const response = {
         statusCode: 200,
