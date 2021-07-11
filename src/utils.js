@@ -13,6 +13,7 @@ const safeTryCatch = (callback, fallback, file) => {
 const readModules = () => safeTryCatch(() => fs.readdirSync(`${__dirname}/../../../src/modules`), [])
 const getConfig = () => safeTryCatch(() => {
   console.log({
+    cwd: process.cwd(),
     configDirname: `../../../src/config`
   })
   return require(`../../../src/config`)
