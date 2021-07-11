@@ -1,6 +1,5 @@
 import fs from 'fs'
 import normalizePath from 'normalize-path'
-import { resolve } from 'path'
 
 const safeTryCatch = (callback, fallback) => {
   try {
