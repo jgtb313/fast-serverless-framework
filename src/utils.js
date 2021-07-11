@@ -17,10 +17,10 @@ const getConfig = async () => {
     resolve: resolve('src/config'),
     cwd: process.cwd(),
     configDirname: `../../../src/config`,
-    readdirSync: fs.readdirSync('.')
+    readdirSync: fs.readdirSync('./src')
   })
   try {
-    const config = await import('../../../src/config')
+    const config = require('./src/config.js')
     return config
   } catch (err) {
     console.log({
