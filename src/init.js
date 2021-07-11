@@ -54,7 +54,7 @@ const buildModuleTopics = (state) => buildService(state.topics, 'Topic', ({ name
     TopicName: kebabCase(name, state.config.stage)
   }
 }))
-const buildModuleConsumers = (state) => buildService(state.consumers, 'Consumer', ({ name, options }) => ({
+const buildModuleConsumers = (state) => buildService(state.consumers, 'Queue', ({ name, options }) => ({
   Type: 'AWS::SQS::Queue',
   Properties: {
     QueueName: kebabCase(name, state.config.stage),
@@ -68,7 +68,7 @@ const buildModuleSubscriptions = (state) => buildService(state.consumers, 'Subsc
     TopicArn: topicRef(topic),
     Endpoint: {
       'Fn::GetAtt': [
-        serviceName(name, 'Consumer'),
+        serviceName(name, 'Queue'),
         'Arn'
       ]
     },
