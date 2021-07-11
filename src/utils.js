@@ -18,8 +18,14 @@ const getConfig = async () => {
     cwd: process.cwd(),
     configDirname: `../../../src/config`
   })
-  const config = await import('../../../src/config')
-  return config
+  try {
+    const config = await import('../../../src/config')
+    return config
+  } catch (err) {
+    console.log({
+      errConfig: err
+    })
+  }
 }
 
 const getContext = () => {
