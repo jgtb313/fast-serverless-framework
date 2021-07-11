@@ -35,11 +35,6 @@ const register = ({ method, params = '', middlewares = [], handler }) => {
         body: body ? JSON.parse(body) : {}
       }
 
-      console.log(state)
-      console.log({
-        __dirname
-      })
-
       const execute = asyncPipe(
         ...(state.config.endpoints?.beforeEach || []),
         ...(middlewares || []),
@@ -49,8 +44,6 @@ const register = ({ method, params = '', middlewares = [], handler }) => {
   
       const result = await execute(request)
 
-      console.log(result)
-  
       const response = {
         statusCode: 200,
         body: JSON.stringify(result)
