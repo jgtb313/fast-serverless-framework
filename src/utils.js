@@ -40,7 +40,22 @@ const getContext = () => {
 
 const capitalize = (value) => value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
 
-const uniq = (array, prop) => [...new Set(array.map(item => prop ? item[prop] : item))]
+const uniq = (array, prop) => array.reduce((state, item) => {
+  const exists = state.some(s => {
+    const value = prop ? s[prop] : s
+    const compare = prop ? item[prop] : item
+    return value === compare
+  })
+
+  if (exists) {
+    return state
+  }
+
+  return [
+    ...state,
+    item
+  ]
+}, [])
 
 const kebabize = (value) => value.replace(/[A-Z]+(?![a-z])|[A-Z]/g, ($, ofs) => (ofs ? '-' : '') + $.toLowerCase())
 
