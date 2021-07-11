@@ -97,7 +97,7 @@ const buildModulePolicies = (state) => ({
           }
         ]
       },
-      Queues: state.consumers.map(consumer => `!Ref ${buildServiceName('Consumer', consumer)}`)
+      Queues: state.consumers.map(consumer => `!Ref ${buildServiceName('Queue', consumer)}`)
     }
   }
 })
