@@ -1,7 +1,7 @@
 import state from '../state'
 
-const options = () => ({
-  ...(state.config.stage === 'local' ? { endpoint: 'http://localhost:4576' } : {})
-})
+const options = () => {
+  return state.config.stage === 'local' ? { endpoint: state.config.aws.endpoint } : {}
+}
 
 export default options

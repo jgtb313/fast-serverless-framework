@@ -23,8 +23,8 @@ const getContext = () => {
     ? a
     : undefined
   const path = service === 'endpoints'
-    ? `src/${from}/${module}/${service}/${version}/${file}`
-    : `src/${from}/${module}/${service}/${file}`
+    ? `src/modules/${module}/${service}/${version}/${file}`
+    : `src/modules/${module}/${service}/${file}`
 
   return {
     module,
