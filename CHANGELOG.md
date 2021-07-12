@@ -2,7 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-<<<<<<< HEAD
+### [0.0.49](https://github.com/jgtb313/fast-serverless-framework/compare/v0.0.48...v0.0.49) (2021-07-12)
+
+
+
 ### [0.0.44](https://github.com/jgtb313/fast-serverless-framework/compare/v0.0.43...v0.0.44) (2021-07-11)
 
 
