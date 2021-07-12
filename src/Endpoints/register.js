@@ -2,7 +2,7 @@ import bootstrap from '../bootstrap'
 import state from '../state'
 import { getContext, kebabize, asyncPipe } from '../utils'
 
-const register = ({ method, params = '', middlewares = [], handler }) => {
+const register = ({ method, params = '', middlewares = [], isPublic, handler }) => {
   const { module, version, file, path } = getContext()
 
   const moduleEndpoint = `${module}-${file}`
@@ -35,11 +35,18 @@ const register = ({ method, params = '', middlewares = [], handler }) => {
         body: body ? JSON.parse(body) : {}
       }
 
+      const options = {
+        isPublic
+      }
+
+      const beforeEach = state.config.endpoints?.beforeEach || []
+      const afterEach = state.config.endpoints?.afterEach || []
+
       const execute = asyncPipe(
-        ...(state.config.endpoints?.beforeEach || []),
-        ...(middlewares || []),
+        ...beforeEach.map(middleware => middleware(options)),
+        ...middlewares.map(middleware => middleware(options)),
         handler,
-        ...(state.config.endpoints?.afterEach || [])
+        ...afterEach.map(middleware => middleware(options)),
       )
   
       const result = await execute(request)

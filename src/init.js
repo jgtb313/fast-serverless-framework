@@ -128,7 +128,8 @@ const buildServerless = (state) => {
       'serverless-offline',
       'serverless-offline-scheduler',
       'serverless-offline-sqs',
-      'serverless-localstack'
+      'serverless-localstack',
+      'serverless-openapi-documentation'
     ],
     custom: {
       localstack: {

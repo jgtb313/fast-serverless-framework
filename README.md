@@ -87,7 +87,7 @@ FastServerlessFramework.init()
 ```
 module.exports = {
   project: '', // (required)
-  boostrap: () => {} // executed before any Consumers, Endpoints or Schedules
+  bootstrap: () => {} // executed before any Consumers, Endpoints or Schedules
   endpoints: {
     beforeEach: [], // executed before any Endpoint
     afterEach: [] // executed after any Endpoint
