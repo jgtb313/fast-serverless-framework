@@ -1,6 +1,5 @@
 import AWS from 'aws-sdk'
 import state from '../../state'
-import options from '../options'
 
 const send = async ({ topic, message }) => {
   const Message = typeof(message) === 'string'
@@ -13,7 +12,7 @@ const send = async ({ topic, message }) => {
     TopicArn
   }
 
-  const data = await new AWS.SNS(options).publish(params).promise()
+  const data = await new AWS.SNS().publish(params).promise()
 
   return data?.MessageId
 }
