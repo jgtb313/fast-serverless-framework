@@ -13,6 +13,7 @@ const state = {
       afterEach: []
     },
     aws: {
+      endpoint: '',
       id: '',
       region: '',
       lambdaRole: ''
