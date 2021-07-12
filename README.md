@@ -94,7 +94,8 @@ module.exports = {
   },
   aws: {
     id: '', // AWS ID Account (required)
-    region: '' // AWS Region (required)
+    region: '', // AWS Region (required)
+    lambdaRole: ''
   },
   stage: '', // (required)
   nodeVersion: '' // (required)
